@@ -1,0 +1,6 @@
+<ul>${restaurants.map((restaurant) => {
+    return `
+    <li><a href="/restaurants/${restaurant.id}">${restaurant.name}</a></li>
+    `
+    }).join('')}
+</ul>

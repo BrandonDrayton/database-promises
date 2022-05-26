@@ -9,7 +9,7 @@ const config = {
     host: "localhost",
     port: 5432,
     database: "restaurants",
-    user: "postgresql",
+    user: "postgres",
 }
 
 const app = express()
@@ -21,6 +21,20 @@ app.set('views', 'templates')
 app.set('view engine', 'html')
 
 // routes go here
+app.get('/restaurants', (req, res) => {
+    db.query('SELECT * FROM restaurants;')
+        .then((results) => {
+            res.render('layout', {
+                partials: {
+                    body: 'partials/restaurant-list'
+                },
+                locals: {
+                    title: 'Restaurants!',
+                    restaurants: results
+                }
+            })
+        })
+})
 
 
 app.get('*', (req, res) => {
